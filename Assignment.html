@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Random User</title>
+<style media="screen">
+#modal
+{
+background-color: rgba(0,0,0,0.5);
+position: fixed;
+height: 100%;
+width: 100%;
+padding: 20px;
+left: 0px;
+top: 0px;
+display: none;
+}
+#container
+{
+background-color: blue;
+position: relative;
+height: 60%;
+width: 60%;
+padding: 10px;
+left: 15%;
+top: 15%;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+}
+</style>
+      <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> -->
+  </head>
+  <body>
+    <button type="button" onclick="getData()">CliCK</button>
+    <div id="modal">
+    <div id="container">
+    <h3 id="name">This is a modal</h3>
+    <div class="card">
+      <img src="" id="image" >
+    </div>
+    <button id="close" onclick="hideDiv()">close</button>
+    </div>
+    </div>
+<script type="text/javascript">
+  function getData()
+  {
+
+    var XHR = new XMLHttpRequest();
+    XHR.onreadystatechange = function()
+    {
+      if(this.readyState == 4 && this.status == 200)
+      {
+        var data = this.responseText;
+        var x = JSON.parse(data);
+        console.log(x);
+        document.getElementById("name").innerHTML = x.results[0].name.first;
+        document.getElementById('image').src = x.results[0].picture.medium;
+        console.log(x.result[0].name.first);
+      }
+    }
+    XHR.open("GET","https://randomuser.me/api",true);
+    XHR.send();
+    document.getElementById("modal").style.display="block";
+  }
+  function hideDiv()
+  {
+  document.getElementById("modal").style.display="none";
+  }
+//  getData();
+</script>
+  </body>
+</html>
+
